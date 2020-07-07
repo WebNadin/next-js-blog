@@ -33,7 +33,7 @@ export default function Layout({
       </Head>
       <header className={styles.header}>
         {home ? (
-          <>a
+          <>
           <img
             src="/images/profile.jpg"
             className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
