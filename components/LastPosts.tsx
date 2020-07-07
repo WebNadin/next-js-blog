@@ -1,33 +1,7 @@
-import styled from 'styled-components'
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { A } from "hookrouter";
-
-const LastPosts = styled.section`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  flex-flow: row wrap;
-`;
-
-const PostCard = styled.div`
-  margin-bottom: 1rem;
-  width: 30%;
-`;
-
-const PostTitle = styled.h3`
-  cursor: pointer;
-  margin: .4rem 0 0;
-  color: black;
-  font-size: 1.1rem;
-  line-height: 1.1;
-`;
-
-const PostImg = styled.img`
-  cursor: pointer;
-  width: 100%;
-  display: block;
-`;
+import utilStyles from '../styles/utils.module.css';
 
 function DataPosts() {
   const [loading, setLoading] = useState(true);
@@ -55,27 +29,27 @@ function DataPosts() {
     </>
   );
   else return (
-    <LastPosts>
+    <section className={utilStyles.lastPosts}>
       {
         posts.map(({ id, date, title, img = 'post1' }) => {
           return (
             (
-            <PostCard key={id}>
+            <div key={id} className={utilStyles.postCard}>
               <A href={`/posts/${id}`}>
-                <PostImg
+                <img className={utilStyles.postImg}
                   src={`/images/${img}.jpg`}
                   alt={id}
                 />
               </A>
               <A href={`/posts/${id}`}>
-                <PostTitle active>{title}</PostTitle>
+                <h3 className={utilStyles.postTitle}>{title}</h3>
               </A>
-            </PostCard>
+            </div>
               )
             )
           })}
       {error ? error: null}
-    </LastPosts>
+    </section>
   )
 }
 

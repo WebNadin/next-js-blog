@@ -3,9 +3,19 @@ import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 import React from 'react'
+import styled from 'styled-components';
 
 const name = 'WebNadin';
 export const siteTitle = 'Next.js Blog';
+
+const HeaderImg = styled.img`
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+  `;
+const HeaderTitle = styled.h1`
+    font-size: 1.5rem;
+  `;
 
 export default function Layout({
   children,
@@ -14,6 +24,7 @@ export default function Layout({
   children: React.ReactNode
   home?: boolean
 }) {
+
   return (
     <div className={styles.container}>
       <Head>
@@ -34,12 +45,12 @@ export default function Layout({
       <header className={styles.header}>
         {home ? (
           <>
-          <img
-            src="/images/profile.jpg"
+          <HeaderImg
             className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
+            src="/images/profile.jpg"
             alt={name}
           />
-          <h1 className={utilStyles.heading2Xl}>{name}</h1>
+          <HeaderTitle>{name}</HeaderTitle>
         </>
           ) : (
           <>

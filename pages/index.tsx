@@ -19,13 +19,11 @@ export default function Home({
   }[]
 }) {
   const routeResult = useRoutes(routes);
-  console.log("routeResult =", routeResult);
   return (
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
       </Head>
-
       {routeResult || <NoPageFound />}
     </Layout >
   )

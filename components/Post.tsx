@@ -6,20 +6,7 @@ export default function DataPost(props) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [post , setPost] = useState({});
-  const Post = styled.section`
-  `;
 
-  const PostTitle = styled.h1`
-  `;
-
-  const PostImage = styled.img`
-    width: 100%;
-    display: block;
-    margin-bottom: 1rem;
-  `;
-
-  const PostBody = styled.div`
-  `;
   useEffect(() => {
     axios.get(`https://simple-blog-api.crew.red/posts/${props.postId}`)
       .then(response => {
@@ -41,17 +28,17 @@ export default function DataPost(props) {
     </>
   );
   else return (
-    <Post>
-      <PostTitle>
+    <section>
+      <h1>
         {post.title}
-      </PostTitle>
-      <PostImage
+      </h1>
+      <img
         src={`/images/${post.img || 'post1'}.jpg`}
         alt={post.id}
       />
-      <PostBody>
+      <div>
         {post.body}
-      </PostBody>
-    </Post>
+      </div>
+    </section>
   )
 }
