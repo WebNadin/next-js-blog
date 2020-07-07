@@ -1,7 +1,8 @@
 import styled from 'styled-components'
-import React, { useState, useEffect, useReducer } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { A } from "hookrouter";
+
 const LastPosts = styled.section`
   display: flex;
   justify-content: space-between;
@@ -60,13 +61,13 @@ function DataPosts() {
           return (
             (
             <PostCard key={id}>
-              <A href="/posts/[id]" as={`/posts/${id}`}>
+              <A href={`/posts/${id}`}>
                 <PostImg
                   src={`/images/${img}.jpg`}
                   alt={id}
                 />
               </A>
-              <A href="/posts/[id]" as={`/posts/${id}`}>
+              <A href={`/posts/${id}`}>
                 <PostTitle active>{title}</PostTitle>
               </A>
             </PostCard>
