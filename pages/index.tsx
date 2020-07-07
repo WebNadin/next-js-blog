@@ -1,4 +1,3 @@
-
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
@@ -10,21 +9,21 @@ import styled from 'styled-components'
 
 const posts = [
   {
-    id: 1,
+    id: '1',
     title: 'Post title 1',
     description: 'Post description 1',
     date: '2020-02-01',
     img: 'post1'
   },
   {
-    id: 2,
+    id: '2',
     title: 'Post title 2',
     description: 'Post description 2',
     date: '2020-02-01',
     img: 'post1'
   },
   {
-    id: 3,
+    id: '3',
     title: 'Post title 3',
     description: 'Post description 3',
     date: '2020-02-01',
@@ -44,9 +43,10 @@ const PostCard = styled.div`
   flex-shrink: 0;
 `;
 
-const PostTitle = styled.h3`
+const PostTitle = styled.h3 < {active: boolean} > `
+  cursor: pointer;
   margin: .4rem 0 0;
-  color: black;
+  color: ${props => (props.active ? 'red' : 'black')};
   font-size: 1.5rem;
 `;
 const PostDate = styled.small`
@@ -54,6 +54,7 @@ const PostDate = styled.small`
 `;
 
 const PostImg = styled.img`
+  cursor: pointer;
   width: 100%;
   display: block;
 `;
@@ -75,7 +76,6 @@ axios.get('https://simple-blog-api.crew.red/posts')
     // always executed
   });
 
-
 export default function Home({
   allPostsData
   }: {
@@ -96,12 +96,14 @@ export default function Home({
       <LastPosts>
         {posts.map(({ id, date, title, img = 'post1' }) => (
         <PostCard key={id}>
-          <PostImg
-            src={`/images/${img}.jpg`}
-            alt={id}
-          />
           <Link href="/posts/[id]" as={`/posts/${id}`}>
-            <PostTitle>{title}</PostTitle>
+            <PostImg
+              src={`/images/${img}.jpg`}
+              alt={id}
+            />
+          </Link>
+          <Link href="/posts/[id]" as={`/posts/${id}`}>
+            <PostTitle active>{title}</PostTitle>
           </Link>
           <small>
             <Date dateString={date}/>
