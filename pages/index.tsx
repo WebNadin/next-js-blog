@@ -6,6 +6,49 @@ import Link from 'next/link'
 import Date from '../components/date'
 import { GetStaticProps } from 'next'
 import styled from 'styled-components'
+import React, { useState, useEffect, useReducer } from 'react'
+import axios from 'axios'
+import reducer from '../reducer'
+
+interface Post {
+  id: string | number,
+  body: string;
+  title: string;
+}
+
+let postsGet:Post[] = [];
+
+function DataPosts() {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [post, setPost] = useState({});
+
+  useEffect(() => {
+    axios.get('https://simple-blog-api.crew.red/posts')
+      .then(response => {
+        setLoading(false);
+        setPost(response.data[0]);
+        setError('');
+      })
+      .catch(error => {
+        setLoading(false);
+        setPost({});
+        setError('Что-то пошло не так...');
+      })
+      .then(function () {
+        console.log('then next');
+        // always executed
+      });
+  }, []);
+
+  return (
+    <div>
+      {loading ? 'Loading' : post.title}
+      {error ? error: null}
+    </div>
+  )
+
+}
 
 const posts = [
   {
@@ -59,23 +102,6 @@ const PostImg = styled.img`
   display: block;
 `;
 
-const axios = require('axios');
-
-// Make a request for a user with a given ID
-axios.get('https://simple-blog-api.crew.red/posts')
-  .then(function (response) {
-    // handle success
-    console.log(response.data[0]);
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
-  .then(function () {
-    console.log('then next');
-    // always executed
-  });
-
 export default function Home({
   allPostsData
   }: {
@@ -90,8 +116,12 @@ export default function Home({
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section className={utilStyles.headingMd}>
+      <section>
         <p>There is a simple blog page.</p>
+      </section>
+      <section>
+        DataAxios:
+        <DataPosts/>
       </section>
       <LastPosts>
         {posts.map(({ id, date, title, img = 'post1' }) => (
