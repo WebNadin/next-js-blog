@@ -1,22 +1,4 @@
 
-<section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-          <li className={utilStyles.listItem} key={id}>
-            <Link href="/posts/[id]" as={`/posts/${id}`}>
-              <a>{title}</a>
-            </Link>
-            <br />
-            <small className={utilStyles.lightText}>
-              <Date dateString={date}/>
-            </small>
-          </li>
-            ))}
-        </ul>
-      </section>
-
-
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
@@ -75,6 +57,24 @@ const PostImg = styled.img`
   width: 100%;
   display: block;
 `;
+
+const axios = require('axios');
+
+// Make a request for a user with a given ID
+axios.get('https://simple-blog-api.crew.red/posts')
+  .then(function (response) {
+    // handle success
+    console.log(response.data[0]);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    console.log('then next');
+    // always executed
+  });
+
 
 export default function Home({
   allPostsData
