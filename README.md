@@ -2,8 +2,6 @@
 
  ![Website working gif](https://github.com/WebNadin/next-js-blog/blob/master/readme-img.gif)
 
- Website link: [My Blog](http://webnadin.inf.ua/next-js-blog/)
-
  You could see here an example of blog. Home page contains user information styled components, last posts cards and
  link to open every post page, loading visualization while posts are getting from server. Click on post card will
  open single post page (one template for all posts).
