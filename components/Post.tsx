@@ -17,6 +17,7 @@ export default function DataPost(props) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [post, setPost]:any = useState({});
+
   useEffect(() => {
     axios.get(`https://simple-blog-api.crew.red/posts/${props.postId}?_embed=comments`)
       .then(response => {
